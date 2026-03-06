@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /websitebatminton/
+    
+    # Skip real files and directories
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Redirect everything to public/index.php
+    RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
+    
+    # Special case for root URL
+    RewriteRule ^$ public/index.php?url= [QSA,L]
+</IfModule>
+
+# Disable directory browsing
+Options -Indexes
+
+# Protect configuration files
+<FilesMatch "\.(htaccess|htpasswd|git|env|config)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

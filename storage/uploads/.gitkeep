@@ -1,0 +1,5 @@
+<?php
+// Prevent direct access to uploads directory
+header('Location: /');
+exit;
+

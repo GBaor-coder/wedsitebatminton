@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /websitebatminton/
+    RewriteBase /github-demo-wedsitebatminton/
     
     # Skip real files and directories
     RewriteCond %{REQUEST_FILENAME} !-f

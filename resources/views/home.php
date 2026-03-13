@@ -462,10 +462,11 @@ require_once ROOT_PATH . '/resources/views/layouts/header.php';
 
 /* Sale Section */
 .sale-section {
-    padding: 50px 0;
+    padding: 50px ;
     background: linear-gradient(135deg, #1C42F3, #1635c9);
+    width: 1300px;
     border-radius: 20px;
-    margin: 40px 0;
+    margin: 40px auto;
 }
 
 .sale-wrapper {

@@ -93,7 +93,7 @@
             <!-- Main Content -->
             <div class="col-md-10 main-content">
                 <!-- Top Navbar -->
-                <div class="row mb-4">
+<div class="row mb-4">
                     <div class="col-md-12">
                         <nav class="navbar navbar-expand-lg navbar-light bg-white rounded shadow-sm px-3">
                             <span class="navbar-brand mb-0 h1"><?php echo $title ?? 'Dashboard'; ?></span>
@@ -107,6 +107,42 @@
                         </nav>
                     </div>
                 </div>
+
+<!-- Quick Access Buttons -->
+<div class="mb-4">
+    <div class="row g-2">
+        <div class="col">
+            <a href="/websitebatminton/admin/products" class="btn btn-outline-primary">
+                <i class="bi bi-box me-1"></i>Sản phẩm
+            </a>
+        </div>
+        <div class="col">
+            <a href="/websitebatminton/admin/categories" class="btn btn-outline-success">
+                <i class="bi bi-tags me-1"></i>Danh mục
+            </a>
+        </div>
+        <div class="col">
+            <a href="/websitebatminton/admin/orders" class="btn btn-outline-warning">
+                <i class="bi bi-cart me-1"></i>Đơn hàng
+            </a>
+        </div>
+        <div class="col">
+            <a href="/websitebatminton/admin/posts" class="btn btn-outline-info">
+                <i class="bi bi-file-earmark-text me-1"></i>Bài viết
+            </a>
+        </div>
+        <div class="col">
+            <a href="/websitebatminton/admin/contacts/messenger" class="btn btn-outline-secondary">
+                <i class="bi bi-chat-dots me-1"></i>Tin nhắn
+            </a>
+        </div>
+        <div class="col">
+            <a href="/websitebatminton/admin/users" class="btn btn-outline-dark">
+                <i class="bi bi-person me-1"></i>Người dùng
+            </a>
+        </div>
+    </div>
+</div>
                 
                 <!-- Flash Messages -->
                 <?php if (isset($success)): ?>

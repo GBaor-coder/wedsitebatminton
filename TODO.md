@@ -1,10 +1,10 @@
-# TODO: Sticky Sidebar Under Header
+# Task: Make admin/posts have only 1 col-md-2 sidebar p-0 - COMPLETED
 
-## Plan Steps:
-- [x] 1. Add 'products-sidebar' class to col-lg-3 col-md-4 in products.php
-- [x] 2. Remove inline style="top: 100px;" from sticky-top div in products.php  
-- [x] 3. Update .products-sidebar .sticky-top in style.css: top:120px, z-index:102
-- [x] 4. Test scroll behavior on /products page
-- [x] 5. Mark complete
+## Steps:
+1. [x] Create TODO.md (done)
+2. [x] Edit resources/views/admin/posts/index.php - remove unused sidebar.php include
+3. [x] Edit resources/views/admin/posts/form.php - remove unused sidebar.php include
+4. [x] Verify layout still has only the header.php sidebar (col-md-2 p-0)
+5. [x] Mark complete and attempt_completion
 
-✅ Task completed! The sidebar now sticks under the header during scroll (top:120px offset). Test at http://localhost/websitebatminton/products
+Layout now uses only the single col-md-2 sidebar p-0 from partials/header.php. Unused sidebar.php includes removed from admin/posts pages for cleanup. No visual changes, clean code.

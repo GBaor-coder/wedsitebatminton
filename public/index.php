@@ -72,6 +72,8 @@ $router->get('news/{slug}', ['controller' => 'Home', 'action' => 'newsDetail']);
 
 // Static pages
 $router->get('contact', ['controller' => 'Home', 'action' => 'contact']);
+$router->post('contact/send', ['controller' => 'Home', 'action' => 'contactSend']);
+$router->get('contact/success', ['controller' => 'Home', 'action' => 'contactSuccess']);
 $router->get('about', ['controller' => 'Home', 'action' => 'about']);
 $router->get('guide', ['controller' => 'Home', 'action' => 'guide']);
 
@@ -99,6 +101,14 @@ $router->post('admin/products/update', ['controller' => 'Product', 'action' => '
 $router->post('admin/products/delete', ['controller' => 'Product', 'action' => 'delete']);
 $router->post('admin/products/status', ['controller' => 'Product', 'action' => 'status']);
 
+$router->get('admin/posts', ['controller' => 'Post', 'action' => 'index']);
+$router->get('admin/posts/create', ['controller' => 'Post', 'action' => 'create']);
+$router->post('admin/posts/store', ['controller' => 'Post', 'action' => 'store']);
+$router->get('admin/posts/edit', ['controller' => 'Post', 'action' => 'edit']);
+$router->post('admin/posts/update', ['controller' => 'Post', 'action' => 'update']);
+$router->post('admin/posts/delete', ['controller' => 'Post', 'action' => 'delete']);
+$router->post('admin/posts/status', ['controller' => 'Post', 'action' => 'status']);
+
 $router->get('admin/categories', ['controller' => 'Category', 'action' => 'index']);
 $router->get('admin/categories/create', ['controller' => 'Category', 'action' => 'create']);
 $router->post('admin/categories/store', ['controller' => 'Category', 'action' => 'store']);
@@ -118,6 +128,9 @@ $router->get('admin/users/edit', ['controller' => 'User', 'action' => 'edit']);
 $router->post('admin/users/update', ['controller' => 'User', 'action' => 'update']);
 $router->post('admin/users/delete', ['controller' => 'User', 'action' => 'delete']);
 $router->post('admin/users/status', ['controller' => 'User', 'action' => 'status']);
+
+$router->get('admin/contacts', ['controller' => 'Contact', 'action' => 'index']);
+$router->get('admin/contacts/messenger', ['controller' => 'Contact', 'action' => 'messenger']);
 
 // Dispatch route
 $router->dispatch($url);

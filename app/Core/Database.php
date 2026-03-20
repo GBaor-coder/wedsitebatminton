@@ -50,14 +50,16 @@ class Database {
      * @return PDOStatement
      */
     public function query($sql, $params = []) {
-        try {
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute($params);
-            return $stmt;
-        } catch (PDOException $e) {
-            error_log("Query Error: " . $e->getMessage());
+
+    $stmt = $this->pdo->prepare($sql);
+
+        if (!$stmt->execute($params)) {
+            print_r($stmt->errorInfo()); // 👈 thêm dòng này
             throw new Exception("Query execution failed");
         }
+
+        return $stmt;
+
     }
     
     /**

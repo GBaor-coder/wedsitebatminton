@@ -13,7 +13,7 @@
                     </div>
                     <div class="card-body p-0">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
+                            <li càlass="list-group-item">
                                 <a href="?<?php if(isset($search) && $search) echo 'search=' . urlencode($search) . '&'; ?>page=1" 
                                    class="d-flex justify-content-between align-items-center text-decoration-none <?php if (!isset($categoryId)) echo 'fw-bold text-primary'; ?>">
                                     <span>Tất cả</span>

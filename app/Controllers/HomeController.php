@@ -195,10 +195,107 @@ class HomeController {
     }
     
     /**
+     * Contact Send - Handle contact form
+     */
+    public function contactSend() {
+        // Basic validation
+        if (empty($_POST['name']) || empty($_POST['phone']) || empty($_POST['message'])) {
+            $_SESSION['error'] = 'Vui lòng điền đầy đủ thông tin';
+            header('Location: /websitebatminton/contact');
+            exit;
+        }
+        
+        // Save to DB or send email (placeholder)
+        $db = \Database::getInstance();
+        $data = [
+            'name' => $_POST['name'],
+            'phone' => $_POST['phone'],
+            'email' => $_POST['email'] ?? '',
+            'subject' => $_POST['subject'] ?? '',
+            'message' => $_POST['message'],
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+        
+        $db = \Database::getInstance();
+        $data = [
+            'name' => $_POST['name'],
+            'phone' => $_POST['phone'],
+            'email' => $_POST['email'] ?? '',
+            'subject' => $_POST['subject'] ?? '',
+            'message' => $_POST['message'],
+            'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
+            'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? '',
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+        
+        $db->query(
+            "INSERT INTO contacts (name, phone, email, subject, message, ip_address, user_agent, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            [
+                $data['name'],
+                $data['phone'],
+                $data['email'],
+                $data['subject'],
+                $data['message'],
+                $data['ip_address'],
+                $data['user_agent'],
+                $data['created_at']
+            ]
+        );
+        $_SESSION['success'] = 'Gửi thành công! Chúng tôi sẽ liên hệ sớm.';
+        header('Location: /websitebatminton/contact/success');
+        exit;
+    }
+    
+    /**
+     * Contact Success - Success page after form submission
+     */
+    public function contactSuccess() {
+        $this->view('contact/success');
+    }
+    
+    /**
      * About - About page
      */
     public function about() {
         $this->view('about');
+    }
+    
+    /**
+     * Admin Contacts - List contact messages
+     */
+    public function adminContacts() {
+        $db = \Database::getInstance();
+        $search = $_GET['search'] ?? '';
+        $page = $_GET['page'] ?? 1;
+        $perPage = 20;
+        $offset = ($page - 1) * $perPage;
+        
+        $where = "1=1";
+        $params = [];
+        
+        if ($search) {
+            $where .= " AND (name LIKE ? OR phone LIKE ? OR email LIKE ? OR subject LIKE ? OR message LIKE ?)";
+            $s = "%$search%";
+            $params = array_fill(0, 5, $s);
+        }
+        
+        $sql = "SELECT * FROM contacts WHERE $where ORDER BY created_at DESC LIMIT $perPage OFFSET $offset";
+        $contacts = $db->fetchAll($sql, $params);
+        
+        $countSql = "SELECT COUNT(*) as total FROM contacts WHERE $where";
+        $total = $db->fetchOne($countSql, $params)['total'] ?? 0;
+        $totalPages = ceil($total / $perPage);
+        
+        $data = [
+            'title' => 'Tin nhắn khách hàng',
+            'contacts' => $contacts,
+            'search' => $search,
+            'currentPage' => $page,
+            'totalPages' => $totalPages,
+            'perPage' => $perPage
+        ];
+        
+        $this->render('admin/contacts/index', $data);
     }
     
     /**
@@ -208,4 +305,5 @@ class HomeController {
         $this->view('guide');
     }
 }
+
 

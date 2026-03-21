@@ -1,6 +1,22 @@
+<?php require_once ROOT_PATH . '/resources/views/layouts/header.php'; ?>
 
 
-<div class="container py-5 my-5">
+<div class="container-fluid py-5">
+    <!-- Hero Section -->
+    <div class="row text-center mb-5">
+        <div class="col-12">
+            <h1 class="display-4 fw-bold mb-3 text-success">THÀNH CÔNG!</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="/websitebatminton/">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="/websitebatminton/contact">Liên hệ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Gửi thành công</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Success Content -->
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">
             <div class="text-center p-5 shadow-lg rounded-4 success-card">

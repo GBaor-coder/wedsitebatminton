@@ -77,8 +77,14 @@
                     <a href="/websitebatminton/admin/orders" class="<?php echo strpos($_SERVER['REQUEST_URI'], 'orders') !== false ? 'active' : ''; ?>">
                         <i class="fas fa-shopping-cart"></i> Đơn hàng
                     </a>
-                    <a href="/websitebatminton/admin/users" class="<?php echo strpos($_SERVER['REQUEST_URI'], 'users') !== false ? 'active' : ''; ?>">
+                <a href="/websitebatminton/admin/users" class="<?php echo strpos($_SERVER['REQUEST_URI'], 'users') !== false ? 'active' : ''; ?>">
                         <i class="fas fa-users"></i> Người dùng
+                    </a>
+                    <a href="/websitebatminton/admin/posts" class="<?php echo strpos($_SERVER['REQUEST_URI'], 'posts') !== false ? 'active' : ''; ?>">
+                        <i class="fas fa-newspaper"></i> Bài viết
+                    </a>
+                    <a href="/websitebatminton/admin/contacts/messenger" class="<?php echo strpos($_SERVER['REQUEST_URI'], 'contacts') !== false || strpos($_SERVER['REQUEST_URI'], 'messenger') !== false ? 'active' : ''; ?>">
+                        <i class="fas fa-envelope"></i> Tin nhắn
                     </a>
                     <div class="border-top border-secondary my-2"></div>
                     <a href="/websitebatminton">
@@ -108,41 +114,7 @@
                     </div>
                 </div>
 
-<!-- Quick Access Buttons -->
-<div class="mb-4">
-    <div class="row g-2">
-        <div class="col">
-            <a href="/websitebatminton/admin/products" class="btn btn-outline-primary">
-                <i class="bi bi-box me-1"></i>Sản phẩm
-            </a>
-        </div>
-        <div class="col">
-            <a href="/websitebatminton/admin/categories" class="btn btn-outline-success">
-                <i class="bi bi-tags me-1"></i>Danh mục
-            </a>
-        </div>
-        <div class="col">
-            <a href="/websitebatminton/admin/orders" class="btn btn-outline-warning">
-                <i class="bi bi-cart me-1"></i>Đơn hàng
-            </a>
-        </div>
-        <div class="col">
-            <a href="/websitebatminton/admin/posts" class="btn btn-outline-info">
-                <i class="bi bi-file-earmark-text me-1"></i>Bài viết
-            </a>
-        </div>
-        <div class="col">
-            <a href="/websitebatminton/admin/contacts/messenger" class="btn btn-outline-secondary">
-                <i class="bi bi-chat-dots me-1"></i>Tin nhắn
-            </a>
-        </div>
-        <div class="col">
-            <a href="/websitebatminton/admin/users" class="btn btn-outline-dark">
-                <i class="bi bi-person me-1"></i>Người dùng
-            </a>
-        </div>
-    </div>
-</div>
+
                 
                 <!-- Flash Messages -->
                 <?php if (isset($success)): ?>

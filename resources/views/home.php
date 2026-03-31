@@ -7,48 +7,18 @@ require_once ROOT_PATH . '/resources/views/layouts/header.php';
 <!-- ============================================
      HERO BANNER SECTION
 ============================================= -->
-<section class="hero-banner">
-    <div class="container-fluid p-0">
-        <div class="hero-wrapper">
-            <!-- Background Image -->
-            <div class="hero-bg">
-                <img src="/websitebatminton/assets/images/banner/banner.jpg" alt="Banner sản phẩm" class="img-fluid">
-            </div>
-            
-            <!-- Overlay -->
-            <div class="hero-overlay"></div>
-            
-            <!-- Content -->
-            <div class="hero-content">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6 col-md-7">
-                            <div class="hero-text">
-                                <h1 class="hero-title">JP SPORT</h1>
-                                <h2 class="hero-subtitle">Cầu lông Chính hãng</h2>
-                                <p class="hero-desc">Chuyên cung cấp vợt cầu lông, giày cầu lông và phụ kiện chính hãng từ các thương hiệu Yonex, Victor, Lining</p>
-                                <div class="hero-buttons">
-                                    <a href="/websitebatminton/products" class="btn btn-hero-primary">
-                                        <i class="bi bi-bag"></i> Mua sắm ngay
-                                    </a>
-                                    <a href="/websitebatminton/about" class="btn btn-hero-outline">
-                                        Tìm hiểu thêm
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-5 d-none d-md-block">
-                            <div class="hero-product">
-                                <img src="/websitebatminton/assets/images/banner/banner1.webp" alt="Sản phẩm nổi bật" class="img-fluid">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="assets\images\banner\baner-yonex-astrox-99.jpg" class="d-block w-100" >
     </div>
-</section>
-
+    <div class="carousel-item">
+      <img src="assets\images\banner\banner1.webp" class="d-block w-100" >
+    </div>
+    <div class="carousel-item">
+      <img src="assets\images\banner\baner-victor-axelsen.webp" class="d-block w-100" >
+  </div>
+</div>
 <!-- ============================================
      POLICY SECTION - 4 Icons
 ============================================= -->

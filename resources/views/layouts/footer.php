@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="main-footer">
+<footer class="main-footer text-bg-secondary">
     <div class="container">
         <div class="row g-4">
             <!-- Column 1: Thông tin cửa hàng -->
@@ -81,14 +81,12 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Copyright -->
-        <div class="footer-bottom">
-            <p>© 2026 JP SPORT. All rights reserved.</p>
-        </div>
+            <!-- Footer bottom -->
+    <div class="footer-bottom text-center text-bg-dark mt-4 py-2 w-100">    
+         <p class="mb-0">© 2026 JP SPORT. All rights reserved.</p>
     </div>
-</footer>
 
+</footer>
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

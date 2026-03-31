@@ -119,7 +119,7 @@ class AuthController extends Controller {
         $session->destroy();
         
         $session->flash('success', 'Đăng xuất thành công');
-        $this->redirect('/websitebatminton/admin/login');
+        $this->redirect('/websitebatminton');
     }
 }
 

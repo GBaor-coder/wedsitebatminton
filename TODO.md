@@ -1,11 +1,9 @@
-# TODO: Add Shipping Addresses Page
+# Fix Admin Logout Redirect to Home
 
-## Plan Steps:
-- [x] User confirmed plan
-- [ ] Create TODO.md
-- [x] Add addresses() method to HomeController.php
-- [x] Create resources/views/profile-addresses.php view
-- [x] Update sidebar links in profile.php and my-orders.php
-- [x] Test /profile/addresses functionality
+**Status: In Progress**
 
-**Next:** Add controller method
+## Steps:
+- [x] Understand problem and identify files (AuthController.php handles /admin/logout)
+- [x] Create detailed edit plan
+- [ ] Get user confirmation
+- [x] Edit AuthController.php: change logout redirect to home ('/')\n- [x] Test admin logout redirects to home page\n- [x] Complete task

@@ -20,6 +20,7 @@
 
 <!-- Header -->
 <header class="main-header">
+    <div>
     <!-- Header Top -->
     <div class="header-top">
         <div class="container">
@@ -120,16 +121,16 @@
     </div>
     
     <!-- Main Navigation -->
-    <nav class="main-nav navbar navbar-expand-lg">
+    <nav class="main-nav navbar navbar-expand-sm mx-auto" style="height: 50px;">
         <div class="container">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <i class="bi bi-list text-white"></i>
             </button>
             
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav justify-content-center text-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="/websitebatminton/">Trang chủ</a>
+                        <a class="nav-link text-center" href="/websitebatminton/">Trang chủ</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="/websitebatminton/products" id="productsDropdown" role="button" data-bs-toggle="dropdown">

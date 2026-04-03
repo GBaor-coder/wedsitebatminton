@@ -15,7 +15,7 @@
         <div class="col-lg-4">
             <div class="contact-info-card shadow-lg p-5 rounded-4 h-100">
                 <div class="text-center mb-4">
-                    <img src="/websitebatminton/assets/images/contact-avatar.png" alt="JP Sport" style="width: 96px; height: 96px; border-radius: 16px; object-fit: cover; border: 2px solid #0d6efd; box-shadow: 0 8px 20px rgba(0,0,0,0.1);" />
+                    <img src="assets\images\logo\JPTachnen.png" alt="JP Sport" style="width: 0 px; height: 96px; border-radius: 16px; object-fit: cover; border: 2px solid #0d6efd; box-shadow: 0 8px 20px rgba(0,0,0,0.1);" />
                     <p class="mt-3 mb-0 fw-semibold">JP SPORT - Hỗ trợ khách hàng</p>
                 </div>
                 <h3 class="text-primary mb-4">Thông tin liên hệ</h3>

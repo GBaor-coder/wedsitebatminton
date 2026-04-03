@@ -217,7 +217,7 @@ class PostController extends AdminBaseController {
         $status = $_POST['status'] ?? 'active';
         
         try {
-            $this->postModel->updateStatus($id, $status);
+            $this->postModel->update($id, ['status' => $status]);
             $this->jsonResponse(['success' => true]);
         } catch (Exception $e) {
             $this->jsonResponse(['success' => false, 'message' => 'Lỗi cập nhật']);

@@ -213,9 +213,16 @@ class HomeController {
         $page = $_GET['page'] ?? 1;
         $perPage = 12;
         
+        // New filters
+        $brand = $_GET['brand'] ?? null; // category id
+        $priceRange = $_GET['price'] ?? null; // e.g., "0-500000"
+        $color = $_GET['color'] ?? null;
+        $size = $_GET['size'] ?? null;
+        $sort = $_GET['sort'] ?? 'newest';
+        
         // Get products with pagination // lấy sản phẩm có phân trang, tìm kiếm và lọc theo danh mục
-        $products = $this->productModel->getPaginated($page, $perPage, $search, $categoryId);
-        $totalProducts = $this->productModel->countProducts($search, $categoryId);
+        $products = $this->productModel->getPaginatedWithFilters($page, $perPage, $search, $categoryId, $brand, $priceRange, $color, $size, $sort);
+        $totalProducts = $this->productModel->countProductsWithFilters($search, $categoryId, $brand, $priceRange, $color, $size);
         $totalPages = ceil($totalProducts / $perPage);
         
         // Get categories // để hiển thị bộ lọc danh mục trên trang sản phẩm
@@ -227,7 +234,12 @@ class HomeController {
             'currentPage' => $page,
             'totalPages' => $totalPages,
             'search' => $search,
-            'categoryId' => $categoryId
+            'categoryId' => $categoryId,
+            'brand' => $brand,
+            'priceRange' => $priceRange,
+            'color' => $color,
+            'size' => $size,
+            'sort' => $sort
         ];
         
         $this->view('products', $data);

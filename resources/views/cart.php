@@ -40,7 +40,7 @@
                                                     <img src="<?= $item['image'] ? '/websitebatminton/storage/uploads/' . $item['image'] : '/websitebatminton/assets/images/product.jpg' ?>" alt="<?= htmlspecialchars($item['name']) ?>" style="width: 70px; height:70px; object-fit: cover; border-radius:10px; margin-right: 12px;" />
                                                     <div>
                                                         <?php $itemSlug = trim($item['slug'] ?? ''); ?>
-<a href="<?= $itemSlug ? '/websitebatminton/products/' . urlencode($itemSlug) : '/websitebatminton/product?id=' . urlencode($item['id']) ?>" class="text-dark fw-semibold"><?= htmlspecialchars($item['name'] ?? 'Sản phẩm') ?></a>
+                                                        <a href="<?= $itemSlug ? '/websitebatminton/products/' . urlencode($itemSlug) : '/websitebatminton/product?id=' . urlencode($item['id']) ?>" class="text-dark fw-semibold"><?= htmlspecialchars($item['name'] ?? 'Sản phẩm') ?></a>
                                                         <br><small class="text-muted">ID: #<?= str_pad($item['id'] ?? 0,5,'0',STR_PAD_LEFT) ?></small>
                                                     </div>
                                                 </div>
@@ -231,28 +231,6 @@ function applyPromo() {
 }
 </script>
 
-<style>
-    /* Giao diện cố định, không có hiệu ứng hover/transition */
-    * {
-        transition: none !important;
-        transform: none !important;
-        animation: none !important;
-    }
 
-    .btn, .btn:hover, .btn:focus, .btn:active {
-        box-shadow: none !important;
-    }
-
-    .card, .card:hover, .card:focus {
-        box-shadow: none !important;
-        border-color: #dee2e6 !important;
-    }
-
-    .btn-outline-primary:hover, .btn-outline-danger:hover {
-        background: #fff !important;
-        color: inherit !important;
-        border-color: inherit !important;
-    }
-</style>
 
 <?php require_once ROOT_PATH . '/resources/views/layouts/footer.php'; ?>

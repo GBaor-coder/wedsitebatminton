@@ -81,6 +81,89 @@ class Product extends Model {
     }
     
     /**
+     * Get products with pagination and advanced filters
+     */
+    public function getPaginatedWithFilters($page = 1, $perPage = 10, $search = '', $categoryId = null, $brand = null, $priceRange = null, $color = null, $size = null, $sort = 'newest') {
+        $offset = ($page - 1) * $perPage;
+        
+        $sql = "SELECT p.*, c.name as category_name FROM {$this->table} p 
+                LEFT JOIN categories c ON p.category_id = c.id";
+        $params = [];
+        
+        $conditions = ["p.status = 'active'"];
+        
+        if ($search) {
+            $conditions[] = "(p.name LIKE ? OR p.description LIKE ? OR p.sku LIKE ?)";
+            $searchTerm = "%{$search}%";
+            $params[] = $searchTerm;
+            $params[] = $searchTerm;
+            $params[] = $searchTerm;
+        }
+        
+        if ($categoryId) {
+            $conditions[] = "p.category_id = ?";
+            $params[] = $categoryId;
+        }
+        
+        if ($brand) {
+            $conditions[] = "p.category_id = ?";
+            $params[] = $brand;
+        }
+        
+        if ($priceRange) {
+            list($min, $max) = explode('-', $priceRange);
+            if ($min !== '' && $max !== '') {
+                $conditions[] = "p.price BETWEEN ? AND ?";
+                $params[] = (float)$min;
+                $params[] = (float)$max;
+            } elseif ($min !== '') {
+                $conditions[] = "p.price >= ?";
+                $params[] = (float)$min;
+            } elseif ($max !== '') {
+                $conditions[] = "p.price <= ?";
+                $params[] = (float)$max;
+            }
+        }
+        
+        // Note: Color and size filters are placeholders since these fields don't exist in DB
+        // You may need to add these fields to the products table
+        if ($color) {
+            // Placeholder: assume color is stored in description or a new field
+            $conditions[] = "p.description LIKE ?";
+            $params[] = "%{$color}%";
+        }
+        
+        if ($size) {
+            // Placeholder: assume size is stored in description or a new field
+            $conditions[] = "p.description LIKE ?";
+            $params[] = "%{$size}%";
+        }
+        
+        $sql .= " WHERE " . implode(' AND ', $conditions);
+        
+        // Sorting
+        switch ($sort) {
+            case 'price_asc':
+                $sql .= " ORDER BY p.price ASC";
+                break;
+            case 'price_desc':
+                $sql .= " ORDER BY p.price DESC";
+                break;
+            case 'name_asc':
+                $sql .= " ORDER BY p.name ASC";
+                break;
+            default:
+                $sql .= " ORDER BY p.id DESC";
+        }
+        
+        $sql .= " LIMIT ? OFFSET ?";
+        $params[] = (int)$perPage;
+        $params[] = (int)$offset;
+        
+        return $this->db->fetchAll($sql, $params);
+    }
+    
+    /**
      * Count products
      */
     public function countProducts($search = '', $categoryId = null) {
@@ -99,6 +182,64 @@ class Product extends Model {
         if ($categoryId) {
             $conditions[] = "category_id = ?";
             $params[] = $categoryId;
+        }
+        
+        $sql .= " WHERE " . implode(' AND ', $conditions);
+        
+        $result = $this->db->fetchOne($sql, $params);
+        return $result['total'] ?? 0;
+    }
+    
+    /**
+     * Count products with advanced filters
+     */
+    public function countProductsWithFilters($search = '', $categoryId = null, $brand = null, $priceRange = null, $color = null, $size = null) {
+        $sql = "SELECT COUNT(*) as total FROM {$this->table}";
+        $params = [];
+        
+        $conditions = ["status = 'active'"];
+        
+        if ($search) {
+            $conditions[] = "(name LIKE ? OR description LIKE ? OR sku LIKE ?)";
+            $searchTerm = "%{$search}%";
+            $params[] = $searchTerm;
+            $params[] = $searchTerm;
+            $params[] = $searchTerm;
+        }
+        
+        if ($categoryId) {
+            $conditions[] = "category_id = ?";
+            $params[] = $categoryId;
+        }
+        
+        if ($brand) {
+            $conditions[] = "category_id = ?";
+            $params[] = $brand;
+        }
+        
+        if ($priceRange) {
+            list($min, $max) = explode('-', $priceRange);
+            if ($min !== '' && $max !== '') {
+                $conditions[] = "price BETWEEN ? AND ?";
+                $params[] = (float)$min;
+                $params[] = (float)$max;
+            } elseif ($min !== '') {
+                $conditions[] = "price >= ?";
+                $params[] = (float)$min;
+            } elseif ($max !== '') {
+                $conditions[] = "price <= ?";
+                $params[] = (float)$max;
+            }
+        }
+        
+        if ($color) {
+            $conditions[] = "description LIKE ?";
+            $params[] = "%{$color}%";
+        }
+        
+        if ($size) {
+            $conditions[] = "description LIKE ?";
+            $params[] = "%{$size}%";
         }
         
         $sql .= " WHERE " . implode(' AND ', $conditions);

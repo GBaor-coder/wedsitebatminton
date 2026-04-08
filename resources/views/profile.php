@@ -108,7 +108,6 @@
 </div>
 
 <style>
-    .container { max-width: 1100px; }
     .list-group-item.active { background: #1c42f3; border-color: #1c42f3; color: #fff; }
     .list-group-item { border-radius: 12px; margin-bottom: 8px; }
 </style>

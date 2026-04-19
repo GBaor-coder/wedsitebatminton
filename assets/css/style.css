@@ -216,8 +216,8 @@ ul {
     background: transparent; 
 }
 .nav-item .dropdown-menu .dropdown-item:hover {
-    background: transparent; 
-    color: var(--main-color); 
+    background: var(--main-color)!important;
+    color: var(--main-color) !important; 
 }
 
 /* Navbar Toggler */
@@ -1268,4 +1268,5 @@ ul {
         gap: 5px;
     }
 }
+
 

@@ -136,7 +136,6 @@
                         <a class="nav-link dropdown-toggle" href="/websitebatminton/products" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sản phẩm
                         </a>
-
                         <div class="dropdown-menu w-100 mt-0 p-4 border-0 shadow">
                             <div class="container">
                                 <div class="row">

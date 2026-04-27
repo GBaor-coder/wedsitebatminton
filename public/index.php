@@ -89,6 +89,9 @@ $router->get('product', ['controller' => 'Home', 'action' => 'productDetail']);
 $router->post('api/create-order', ['controller' => 'Home', 'action' => 'createOrder']);
 $router->post('api/clear-cart', ['controller' => 'Home', 'action' => 'clearCart']);
 
+// Order Lookup (Tra cứu đơn hàng)
+$router->get('tra-cuu-don-hang', ['controller' => 'Home', 'action' => 'orderLookup']);
+
 // Profile
 $router->get('profile', ['controller' => 'Home', 'action' => 'profile']);
 $router->get('thanh-vien', ['controller' => 'Home', 'action' => 'profile']);

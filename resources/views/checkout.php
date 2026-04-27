@@ -162,7 +162,7 @@
                                placeholder="Mã giảm giá" id="promoCode">
                     </div>
                     <button type="button" class="btn btn-outline-primary btn-sm w-100 mb-3">
-                        ÁPLÝ MÃ
+                         Áp dụng mã giảm giá
                     </button>
 
                     <!-- Checkout Button -->

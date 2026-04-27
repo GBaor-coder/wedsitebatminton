@@ -56,13 +56,33 @@
                         
                         <!-- Action Icons -->
                         <div class="action-icons d-flex gap-3 text-start">
-                            <!-- Tra cứu -->
-                            <a href="/websitebatminton/products" class="action-item d-flex flex-column align-items-center text-decoration-none" title="Tra cứu">
-                                <div class="action-icon rounded-circle border p-2 d-flex align-items-center justify-content-center mb-1">
-                                    <i class="bi bi-search"></i>
+                            <!-- Tra cứu đơn hàng -->
+                            <div class="action-item d-flex flex-column align-items-center position-relative">
+                                <div class="dropdown w-100 h-100 d-flex flex-column align-items-center">
+                                    <a href="#" class="action-icon mb-1 p-2 rounded-circle border d-flex align-items-center justify-content-center" data-bs-toggle="dropdown" aria-expanded="false" title="Tra cứu đơn hàng" style="width: 40px; height: 40px;">
+                                        <i class="bi bi-search"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end p-3 shadow border-0" style="min-width: 320px; border-radius: 16px;">
+                                        <h6 class="fw-bold mb-3 text-primary">
+                                            <i class="bi bi-box-seam me-2"></i>Tra cứu đơn hàng
+                                        </h6>
+                                        <form action="/websitebatminton/tra-cuu-don-hang" method="GET">
+                                            <div class="mb-3">
+                                                <label class="form-label small fw-semibold text-muted">Mã đơn hàng</label>
+                                                <input type="text" name="order_number" class="form-control form-control-sm" placeholder="VD: ORD-20260101-ABC123" style="border-radius: 10px;">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label small fw-semibold text-muted">Hoặc Số điện thoại</label>
+                                                <input type="text" name="phone" class="form-control form-control-sm" placeholder="VD: 0342826430" style="border-radius: 10px;">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary w-100 fw-bold" style="border-radius: 10px;">
+                                                <i class="bi bi-search me-1"></i>Tra cứu
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <small class="action-label fw-medium text-muted small-text text-nowrap">Tra cứu</small>
                                 </div>
-                                <small class="action-label fw-medium text-muted small-text text-nowrap">Tra cứu</small>
-                            </a>
+                            </div>
 
                             <!-- User Account -->
                             <div class="action-item d-flex flex-column align-items-center position-relative">

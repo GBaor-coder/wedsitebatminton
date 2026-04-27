@@ -108,7 +108,7 @@ class Product extends Model {
         }
         
         if ($brand) {
-            $conditions[] = "p.category_id = ?";
+            $conditions[] = "p.brand_id = ?";
             $params[] = $brand;
         }
         
@@ -215,7 +215,7 @@ class Product extends Model {
         }
         
         if ($brand) {
-            $conditions[] = "category_id = ?";
+            $conditions[] = "brand_id = ?";
             $params[] = $brand;
         }
         

@@ -1,14 +1,13 @@
-# Task Progress: Fix SQL Errors - orders table schema sync
+# TODO: Tra cứu đơn hàng giống shopvnb.com
 
-✅ **Completed:**
-- Fixed `shipping_method` column (user ran ALTER TABLE)
-- Added missing columns: `shipping_address`, `shipping_city`, `shipping_country`, `customer_name`, `customer_email`, `customer_phone`, `subtotal`
-- All ALTER TABLE commands executed successfully
-- Fixed INSERT query in HomeController to include all required fields (customer_address, discount_amount, payment_status)
-- Updated Order model fillable array with all database fields
+## Steps
 
-**Verification Steps:**
-1. ✅ Run `DESCRIBE orders;` - shows all columns including shipping_address
-2. Test checkout: cart → checkout → place order (no SQL errors)
+- [x] Step 1: Sửa `resources/views/layouts/header.php` — Đổi icon "Tra cứu" thành dropdown form nhập mã đơn + SĐT
+- [x] Step 2: Tạo `resources/views/order-lookup.php` — Trang kết quả tra cứu đơn hàng
+- [x] Step 3: Sửa `public/index.php` — Thêm route `tra-cuu-don-hang`
+- [x] Step 4: Sửa `app/Controllers/HomeController.php` — Thêm method `orderLookup()`
+- [x] Step 5: Chỉnh giao diện `resources/views/about.php` — Giống shopvnb.com
 
-**Status:** All SQL errors fixed - ready for testing
+## Completed ✅
+
+

@@ -6,6 +6,7 @@
 
 require_once ROOT_PATH . '/app/Models/Product.php';
 require_once ROOT_PATH . '/app/Models/Category.php';
+require_once ROOT_PATH . '/app/Models/Brand.php';
 require_once ROOT_PATH . '/app/Models/Post.php';
 require_once ROOT_PATH . '/app/Models/User.php';
 require_once ROOT_PATH . '/app/Models/Guide.php';
@@ -13,6 +14,7 @@ require_once ROOT_PATH . '/app/Models/Guide.php';
 class HomeController {
     private $productModel;
     private $categoryModel;
+    private $brandModel;
     private $postModel;
     private $userModel;
     private $params = [];
@@ -24,6 +26,7 @@ class HomeController {
     public function __construct($params = []) {
         $this->productModel = new Product();
         $this->categoryModel = new Category();
+        $this->brandModel = new Brand();
         $this->postModel = new Post();
         $this->userModel = new User();
         $this->guideModel = new Guide();
@@ -234,12 +237,14 @@ class HomeController {
         $totalProducts = $this->productModel->countProductsWithFilters($search, $categoryId, $brand, $priceRange, $color, $size);
         $totalPages = ceil($totalProducts / $perPage);
         
-        // Get categories // để hiển thị bộ lọc danh mục trên trang sản phẩm
+        // Get categories and brands // để hiển thị bộ lọc danh mục và hãng trên trang sản phẩm
         $categories = $this->categoryModel->getActiveCategories();
+        $brands = $this->brandModel->getActiveBrands();
         
         $data = [
             'products' => $products,
             'categories' => $categories,
+            'brands' => $brands,
             'currentPage' => $page,
             'totalPages' => $totalPages,
             'search' => $search,
@@ -1135,6 +1140,55 @@ class HomeController {
         }
         
         $this->view('guide', $data);
+    }
+
+    /**
+     * Order Lookup - Tra cứu đơn hàng (không cần đăng nhập)
+     */
+    public function orderLookup() {
+        $orderNumber = trim($_GET['order_number'] ?? '');
+        $phone = trim($_GET['phone'] ?? '');
+        
+        $order = null;
+        $items = [];
+        
+        if ($orderNumber || $phone) {
+            $db = \Database::getInstance();
+            
+            if ($orderNumber) {
+                // Tìm theo mã đơn hàng
+                $order = $db->fetchOne(
+                    "SELECT * FROM orders WHERE order_number = ?",
+                    [$orderNumber]
+                );
+            } elseif ($phone) {
+                // Tìm theo số điện thoại (lấy đơn mới nhất)
+                $order = $db->fetchOne(
+                    "SELECT * FROM orders WHERE customer_phone = ? ORDER BY created_at DESC LIMIT 1",
+                    [$phone]
+                );
+            }
+            
+            // Lấy chi tiết sản phẩm trong đơn hàng
+            if ($order) {
+                $items = $db->fetchAll(
+                    "SELECT oi.*, p.name as product_name, p.image as product_image 
+                     FROM order_items oi 
+                     LEFT JOIN products p ON oi.product_id = p.id 
+                     WHERE oi.order_id = ?",
+                    [$order['id']]
+                );
+            }
+        }
+        
+        $data = [
+            'orderNumber' => $orderNumber,
+            'phone' => $phone,
+            'order' => $order,
+            'items' => $items
+        ];
+        
+        $this->view('order-lookup', $data);
     }
 
 }

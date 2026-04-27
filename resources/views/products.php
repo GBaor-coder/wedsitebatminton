@@ -12,10 +12,10 @@
                             <div class="col-md-2">
                                 <select class="form-select" name="brand" id="brand-filter">
                                     <option value="">Thương hiệu</option>
-                                    <?php if (!empty($categories)): ?>
-                                        <?php foreach ($categories as $category): ?>
-                                            <option value="<?= htmlspecialchars($category['id']); ?>" <?= (isset($brand) && $brand == $category['id']) ? 'selected' : ''; ?>>
-                                                <?= htmlspecialchars($category['name']); ?>
+                                    <?php if (!empty($brands)): ?>
+                                        <?php foreach ($brands as $brandItem): ?>
+                                            <option value="<?= htmlspecialchars($brandItem['id']); ?>" <?= (isset($brand) && $brand == $brandItem['id']) ? 'selected' : ''; ?>>
+                                                <?= htmlspecialchars($brandItem['name']); ?>
                                             </option>
                                         <?php endforeach; ?>
                                     <?php endif; ?>

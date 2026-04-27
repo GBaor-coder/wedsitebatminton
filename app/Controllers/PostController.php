@@ -33,7 +33,9 @@ class PostController extends AdminBaseController {
             'title' => 'Quản lý bài viết',
             'posts' => $posts,
             'search' => $search,
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'page' => $page,
+            'perPage' => $perPage
         ];
         
         $this->render('posts/index', $data);

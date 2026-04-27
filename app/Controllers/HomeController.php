@@ -952,7 +952,7 @@ class HomeController {
         $data = json_decode(file_get_contents('php://input'), true);
         
         // Validate required fields
-        if (!$data['first_name'] || !$data['last_name'] || !$data['email'] || 
+        if (!$data['name'] || !$data['email'] || 
             !$data['phone'] || !$data['address'] || !$data['city']) {
             http_response_code(400);
             echo json_encode(['success' => false, 'message' => 'Dữ liệu không đầy đủ']);
@@ -1002,7 +1002,7 @@ class HomeController {
             $params = [
                 $userId,
                 $orderNumber,
-                $data['first_name'] . ' ' . $data['last_name'],
+                $data['name'],
                 $data['email'],
                 $data['phone'],
                 $data['address'], // customer_address

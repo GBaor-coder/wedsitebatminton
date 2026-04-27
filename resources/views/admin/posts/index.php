@@ -1,6 +1,3 @@
-
-
-
 <div class="main-content">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3 mb-0">Quản lý bài viết</h1>
@@ -58,7 +55,7 @@
                                 <th>Trạng thái</th>
                                 <th>Hình ảnh</th>
                                 <th>Ngày tạo</th>
-                                <th style="width: 150px">Thao tác</th>
+                                <th style="width: 120px">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,18 +88,18 @@
                                 </td>
                                 <td><small class="text-muted"><?= date('d/m/Y H:i', strtotime($post['created_at'])); ?></small></td>
                                 <td>
-                                    <div class="btn-group" role="group">
-                                        <a href="/websitebatminton/admin/posts/edit?id=<?= $post['id']; ?>" class="btn btn-sm btn-outline-primary" title="Sửa">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
-                                        <form method="POST" action="/websitebatminton/admin/posts/delete" class="d-inline" onsubmit="return confirm('Xóa?')">
-                                            <input type="hidden" name="csrf_token" value="<?= $csrf_token; ?>">
-                                            <input type="hidden" name="id" value="<?= $post['id']; ?>">
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" title="Xóa">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
-                                    </div>
+                                    <a href="/websitebatminton/admin/posts/edit?id=<?= $post['id']; ?>" 
+                                       class="btn btn-sm btn-outline-primary" title="Sửa">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <form method="POST" action="/websitebatminton/admin/posts/delete" 
+                                          class="d-inline" onsubmit="return confirm('Xóa bài viết này?');">
+                                        <input type="hidden" name="csrf_token" value="<?= $csrf_token; ?>">
+                                        <input type="hidden" name="id" value="<?= $post['id']; ?>">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Xóa">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
@@ -111,9 +108,17 @@
                 </div>
                 
                 <!-- Pagination -->
-                <?php if (isset($pagination)): ?>
+                <?php if (isset($pagination) && $pagination['total_pages'] > 1): ?>
                     <nav class="d-flex justify-content-center mt-4">
-                        <?= $pagination; ?>
+                        <ul class="pagination">
+                            <?php for ($i = 1; $i <= $pagination['total_pages']; $i++): ?>
+                                <li class="page-item <?= $pagination['page'] == $i ? 'active' : ''; ?>">
+                                    <a class="page-link" href="?page=<?= $i; ?><?= !empty($search) ? '&search=' . urlencode($search) : ''; ?>">
+                                        <?= $i; ?>
+                                    </a>
+                                </li>
+                            <?php endfor; ?>
+                        </ul>
                     </nav>
                 <?php endif; ?>
             <?php endif; ?>
@@ -121,5 +126,4 @@
     </div>
 </div>
 
-<?php include __DIR__ . '/../partials/footer.php'; ?>
 

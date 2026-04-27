@@ -151,6 +151,7 @@ $router->get('admin/brands/filter', ['controller' => 'Brand', 'action' => 'filte
 $router->get('admin/orders', ['controller' => 'Order', 'action' => 'index']);
 $router->get('admin/orders/view', ['controller' => 'Order', 'action' => 'show']);
 $router->post('admin/orders/status', ['controller' => 'Order', 'action' => 'status']);
+$router->post('admin/orders/payment-status', ['controller' => 'Order', 'action' => 'paymentStatus']);
 $router->post('admin/orders/delete', ['controller' => 'Order', 'action' => 'delete']);
 
 $router->get('admin/users', ['controller' => 'User', 'action' => 'index']);

@@ -107,6 +107,43 @@ class OrderController extends AdminBaseController {
     }
     
     /**
+     * Update payment status
+     */
+    public function paymentStatus() {
+        if (!$this->isPost()) {
+            $this->jsonResponse(['success' => false, 'message' => 'Invalid request']);
+        }
+        
+        // Validate CSRF
+        if (!$this->validateCsrf()) {
+            $this->jsonResponse(['success' => false, 'message' => 'Token không hợp lệ']);
+        }
+        
+        $id = $_POST['id'] ?? 0;
+        $paymentStatus = $_POST['payment_status'] ?? '';
+        
+        // Valid payment statuses
+        $validStatuses = ['pending', 'paid', 'failed'];
+        
+        if (!in_array($paymentStatus, $validStatuses)) {
+            $this->jsonResponse(['success' => false, 'message' => 'Trạng thái thanh toán không hợp lệ']);
+        }
+        
+        $order = $this->orderModel->find($id);
+        
+        if (!$order) {
+            $this->jsonResponse(['success' => false, 'message' => 'Đơn hàng không tồn tại']);
+        }
+        
+        try {
+            $this->orderModel->update($id, ['payment_status' => $paymentStatus]);
+            $this->jsonResponse(['success' => true, 'message' => 'Cập nhật trạng thái thanh toán thành công']);
+        } catch (Exception $e) {
+            $this->jsonResponse(['success' => false, 'message' => 'Lỗi khi cập nhật trạng thái thanh toán']);
+        }
+    }
+    
+    /**
      * Delete order
      */
     public function delete() {

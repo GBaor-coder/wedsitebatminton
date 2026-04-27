@@ -43,28 +43,28 @@
                                     <tbody>
                                         <?php foreach ($orders as $order): ?>
                                             <?php
-                                            $statusClass = 'badge-secondary';
+                                            $statusClass = 'bg-secondary';
                                             $statusText = $order['status'];
                                             
                                             switch($order['status']) {
                                                 case 'pending':
-                                                    $statusClass = 'badge-warning text-dark';
+                                                    $statusClass = 'bg-warning text-dark';
                                                     $statusText = 'Chờ xử lý';
                                                     break;
                                                 case 'processing':
-                                                    $statusClass = 'badge-info';
+                                                    $statusClass = 'bg-info';
                                                     $statusText = 'Đang xử lý';
                                                     break;
                                                 case 'shipped':
-                                                    $statusClass = 'badge-primary';
+                                                    $statusClass = 'bg-primary';
                                                     $statusText = 'Đã gửi hàng';
                                                     break;
                                                 case 'completed':
-                                                    $statusClass = 'badge-success';
+                                                    $statusClass = 'bg-success';
                                                     $statusText = 'Hoàn thành';
                                                     break;
                                                 case 'cancelled':
-                                                    $statusClass = 'badge-danger';
+                                                    $statusClass = 'bg-danger';
                                                     $statusText = 'Đã hủy';
                                                     break;
                                             }

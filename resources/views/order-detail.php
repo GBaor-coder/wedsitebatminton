@@ -66,17 +66,17 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <?php if ($item['product_image']): ?>
-                                                        <img src="/websitebatminton/assets/images/image_products/<?php echo htmlspecialchars($item['product_image']); ?>" 
-                                                             alt="<?php echo htmlspecialchars($item['product_name']); ?>" 
+                                                    <?php if (!empty($item['product_image'])): ?>
+                                                        <img src="/websitebatminton/storage/uploads/<?php echo htmlspecialchars($item['product_image']); ?>" 
+                                                             alt="<?php echo htmlspecialchars($item['product_name'] ?? 'Sản phẩm'); ?>" 
                                                              style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px; border-radius: 4px;">
                                                     <?php endif; ?>
                                                     <span><?php echo htmlspecialchars($item['product_name'] ?? 'Sản phẩm'); ?></span>
                                                 </div>
                                             </td>
                                             <td class="text-end"><?php echo $item['quantity']; ?></td>
-                                            <td class="text-end"><?php echo number_format($item['price'], 0, ',', '.'); ?>đ</td>
-                                            <td class="text-end"><strong><?php echo number_format($item['subtotal'], 0, ',', '.'); ?>đ</strong></td>
+                                            <td class="text-end"><?php echo number_format($item['price'] ?? $item['product_price'] ?? 0, 0, ',', '.'); ?>đ</td>
+                                            <td class="text-end"><strong><?php echo number_format($item['subtotal'] ?? $item['total'] ?? 0, 0, ',', '.'); ?>đ</strong></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php else: ?>
@@ -113,7 +113,6 @@
                                     $shippingMethods = [
                                         'standard' => 'Giao hàng tiêu chuẩn (3-5 ngày)',
                                         'express' => 'Giao hàng nhanh (1-2 ngày)',
-                                        'overnight' => 'Giao hàng qua đêm'
                                     ];
                                     $shippingMethod = $order['shipping_method'] ?? 'standard';
                                     echo $shippingMethods[$shippingMethod] ?? $shippingMethod;

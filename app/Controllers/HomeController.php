@@ -1104,7 +1104,7 @@ class HomeController {
         }
 
         // Fetch order items
-        $itemsQuery = "SELECT oi.*, p.name as product_name, p.image as product_image 
+        $itemsQuery = "SELECT oi.id, oi.order_id, oi.product_id, oi.product_name, oi.product_price as price, oi.quantity, oi.subtotal, oi.created_at, p.name as product_name, p.image as product_image 
                       FROM order_items oi 
                       LEFT JOIN products p ON oi.product_id = p.id 
                       WHERE oi.order_id = ?";
@@ -1172,7 +1172,7 @@ class HomeController {
             // Lấy chi tiết sản phẩm trong đơn hàng
             if ($order) {
                 $items = $db->fetchAll(
-                    "SELECT oi.*, p.name as product_name, p.image as product_image 
+                    "SELECT oi.id, oi.order_id, oi.product_id, oi.product_name, oi.product_price as price, oi.quantity, oi.subtotal, oi.created_at, p.name as product_name, p.image as product_image 
                      FROM order_items oi 
                      LEFT JOIN products p ON oi.product_id = p.id 
                      WHERE oi.order_id = ?",

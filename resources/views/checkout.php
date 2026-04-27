@@ -71,12 +71,6 @@
                             <strong>Giao hàng nhanh</strong> - 30.000đ (1-2 ngày làm việc)
                         </label>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="shipping" id="overnight" value="overnight">
-                        <label class="form-check-label" for="overnight">
-                            <strong>Giao hàng qua đêm</strong> - 50.000đ (ngày hôm sau)
-                        </label>
-                    </div>
                 </div>
             </div>
 

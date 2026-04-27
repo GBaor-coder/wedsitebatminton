@@ -174,42 +174,151 @@
             </div>
         </div>
         
-        <!-- Update Status -->
-        <?php if ($order['status'] != 'completed' && $order['status'] != 'cancelled'): ?>
-        <div class="card mt-4">
-            <div class="card-header">
-                <h6 class="mb-0">Cập nhật trạng thái</h6>
-            </div>
-            <div class="card-body">
-                <form method="POST" action="/websitebatminton/admin/orders/status" id="statusForm">
-                    <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
-                    <input type="hidden" name="id" value="<?php echo $order['id']; ?>">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <select name="status" class="form-select">
-                                <option value="">Chọn trạng thái</option>
-                                <?php if ($order['status'] == 'pending'): ?>
-                                <option value="processing">Xác nhận đơn hàng</option>
-                                <?php endif; ?>
-                                <?php if ($order['status'] == 'processing'): ?>
-                                <option value="shipped">Giao hàng</option>
-                                <?php endif; ?>
-                                <?php if ($order['status'] == 'shipped'): ?>
-                                <option value="completed">Hoàn thành</option>
-                                <?php endif; ?>
-                                <option value="cancelled">Hủy đơn hàng</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <button type="submit" class="btn btn-primary w-100">
-                                <i class="fas fa-save"></i> Cập nhật
-                            </button>
-                        </div>
-                    </div>
-                </form>
+        <!-- Toast Notification -->
+        <div id="statusToast" class="toast align-items-center text-white border-0 mt-3" role="alert" aria-live="assertive" aria-atomic="true" style="position: fixed; top: 20px; right: 20px; z-index: 9999; display: none;">
+            <div class="d-flex">
+                <div class="toast-body" id="statusToastBody"></div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
-        <?php endif; ?>
+
+        <div class="row mt-4">
+            <!-- Update Order Status -->
+            <?php if ($order['status'] != 'completed' && $order['status'] != 'cancelled'): ?>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="mb-0">Cập nhật trạng thái đơn hàng</h6>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="/websitebatminton/admin/orders/status" id="statusForm">
+                            <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                            <input type="hidden" name="id" value="<?php echo $order['id']; ?>">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <select name="status" class="form-select" id="statusSelect">
+                                        <option value="">Chọn trạng thái</option>
+                                        <?php if ($order['status'] == 'pending'): ?>
+                                        <option value="processing">Xác nhận đơn hàng</option>
+                                        <?php endif; ?>
+                                        <?php if ($order['status'] == 'processing'): ?>
+                                        <option value="shipped">Giao hàng</option>
+                                        <?php endif; ?>
+                                        <?php if ($order['status'] == 'shipped'): ?>
+                                        <option value="completed">Hoàn thành</option>
+                                        <?php endif; ?>
+                                        <option value="cancelled">Hủy đơn hàng</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary w-100" id="statusSubmitBtn">
+                                        <i class="fas fa-save"></i> Cập nhật
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
+
+            <!-- Update Payment Status -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="mb-0">Cập nhật trạng thái thanh toán</h6>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="/websitebatminton/admin/orders/payment-status" id="paymentStatusForm">
+                            <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+                            <input type="hidden" name="id" value="<?php echo $order['id']; ?>">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <select name="payment_status" class="form-select" id="paymentStatusSelect">
+                                        <option value="pending" <?php echo ($order['payment_status'] ?? 'pending') == 'pending' ? 'selected' : ''; ?>>Chưa thanh toán</option>
+                                        <option value="paid" <?php echo ($order['payment_status'] ?? '') == 'paid' ? 'selected' : ''; ?>>Đã thanh toán</option>
+                                        <option value="failed" <?php echo ($order['payment_status'] ?? '') == 'failed' ? 'selected' : ''; ?>>Thanh toán thất bại</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-success w-100" id="paymentStatusSubmitBtn">
+                                        <i class="fas fa-credit-card"></i> Cập nhật
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+        // Order Status Form
+        var statusForm = document.getElementById('statusForm');
+        if (statusForm) {
+            statusForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                handleFormSubmit(this, 'statusSubmitBtn', 'statusSelect', 'Cập nhật trạng thái đơn hàng thành công');
+            });
+        }
+
+        // Payment Status Form
+        document.getElementById('paymentStatusForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleFormSubmit(this, 'paymentStatusSubmitBtn', 'paymentStatusSelect', 'Cập nhật trạng thái thanh toán thành công');
+        });
+
+        function handleFormSubmit(form, btnId, selectId, successMessage) {
+            var btn = document.getElementById(btnId);
+            var originalText = btn.innerHTML;
+            var select = document.getElementById(selectId);
+
+            if (select && !select.value) {
+                showStatusToast('Vui lòng chọn trạng thái', 'bg-warning');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang cập nhật...';
+
+            var formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+
+                if (data.success) {
+                    showStatusToast(data.message || successMessage, 'bg-success');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
+                } else {
+                    showStatusToast(data.message || 'Cập nhật thất bại', 'bg-danger');
+                }
+            })
+            .catch(function() {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                showStatusToast('Có lỗi xảy ra. Vui lòng thử lại.', 'bg-danger');
+            });
+        }
+
+        function showStatusToast(message, bgClass) {
+            var toast = document.getElementById('statusToast');
+            var body = document.getElementById('statusToastBody');
+            body.textContent = message;
+            toast.className = 'toast align-items-center text-white border-0 mt-3 ' + bgClass;
+            toast.style.display = 'flex';
+            setTimeout(function() {
+                toast.style.display = 'none';
+            }, 4000);
+        }
+        </script>
     </div>
 </div>
 
